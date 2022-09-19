@@ -1,5 +1,6 @@
 # Introducing OpenShift Dynamic Storage
 
+## Objective
 In this exercise, you will deploy a PostgreSQL database using a persistent volume claim and identify its dynamically allocated volume.
 
 ## Outcomes

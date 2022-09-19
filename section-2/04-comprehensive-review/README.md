@@ -1,5 +1,6 @@
 # Containerizing and Deploying a Software Application
 
+## Objective
 In this review, you will containerize a Nexus server, build and test it using Podman, and deploy
 it to an OpenShift cluster.
 

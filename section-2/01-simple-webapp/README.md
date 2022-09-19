@@ -1,6 +1,6 @@
 # Deploying Containerized Applications on OpenShift
 
-## Performance Checklist
+## Objective
 In this lab, you will create an application using the OpenShift Source-to-Image facility.
 
 ## Outcomes
