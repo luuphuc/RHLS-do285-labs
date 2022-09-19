@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-http
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: todo-http
+  template:
+    metadata:
+      labels:
+        deployment: todo-http
+    spec:
+      containers:
+        - name: todo-http-angular
+          image: quay.io/redhattraining/todo-angular:v1.1
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: todo-http
+  name: todo-http
+spec:
+  ports:
+  - name: 80-tcp
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    deployment: todo-http
+  type: ClusterIP
