@@ -1,0 +1,47 @@
+apiVersion: v1
+baseDomain: dsocloud.space
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: 
+    gcp:
+      type: n2-standard-4
+      zones:
+      - asia-southeast1-a
+      osDisk:
+        diskType: pd-ssd
+        diskSizeGB: 80
+  replicas: 2
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: 
+    gcp:
+      type: n2-standard-4
+      zones:
+      - asia-southeast1-a
+      osDisk:
+        diskType: pd-ssd
+        diskSizeGB: 100
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: ocp-do285-bidv
+networking:
+  clusterNetwork:
+  - cidr: 192.168.0.0/16
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/24
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  gcp:
+    projectID: <project_ID>
+    region: asia-southeast1
+publish: External
+sshKey: 'ssh-ed25519 AAAAC... luuphuc@localhost.localdomain'
+pullSecret: '...'
