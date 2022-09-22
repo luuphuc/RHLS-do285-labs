@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-https
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: todo-https
+  template:
+    metadata:
+      labels:
+        deployment: todo-https
+    spec:
+      containers:
+        - name: todo-https-angular
+          image: quay.io/redhattraining/todo-angular:v1.1
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8080
+          volumeMounts:
+          - name: tls
+            mountPath: "/usr/local/etc/ssl/certs"
+            readOnly: true
+      volumes:
+      - name: tls
+        secret:
+          secretName: todo-certs
+          optional: false # default setting; "mysecret" must exist
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: todo-https
+  name: todo-https
+spec:
+  ports:
+  - name: 80-tcp
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    deployment: todo-https
+  type: ClusterIP
