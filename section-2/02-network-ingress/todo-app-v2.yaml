@@ -17,7 +17,7 @@ spec:
           image: quay.io/redhattraining/todo-angular:v1.1
           imagePullPolicy: IfNotPresent
           ports:
-          - containerPort: 8080
+          - containerPort: 8443
           volumeMounts:
           - name: tls
             mountPath: "/usr/local/etc/ssl/certs"
@@ -41,7 +41,7 @@ spec:
   - name: 80-tcp
     port: 80
     protocol: TCP
-    targetPort: 8080
+    targetPort: 8443
   selector:
     deployment: todo-https
   type: ClusterIP
